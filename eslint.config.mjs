@@ -27,8 +27,9 @@ export default [
         { argsIgnorePattern: "^_" },
       ],
       "prettier/prettier": [
-        "error",
+        "warn",
         {
+          trailingComma: "all",
           endOfLine: "auto",
         },
       ],

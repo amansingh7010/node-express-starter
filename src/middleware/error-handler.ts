@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import logger from "services/server/logger";
 
 import { CustomError } from "../errors";
 
@@ -12,7 +13,7 @@ export const errorHandler: (
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
-  console.error(err);
+  logger.error(err);
   res.status(500).send({
     errors: [{ message: "Something went wrong" }],
   });
