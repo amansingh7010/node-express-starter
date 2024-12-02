@@ -4,7 +4,6 @@ import path from "path";
 
 // Define available log transports
 const buildTransports = () => {
-  console.log("building transpors");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const logTransports: any[] = [];
 

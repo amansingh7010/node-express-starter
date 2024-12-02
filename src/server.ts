@@ -1,4 +1,4 @@
-import logger from "services/server/logger";
+import logger from "@services/logger.service";
 
 import { app } from "./app";
 
