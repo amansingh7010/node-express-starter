@@ -1,4 +1,8 @@
 import express from "express";
+import "express-async-errors";
+
+import { errorHandler } from "./middleware/error-handler";
+import { NotFoundError } from "./errors";
 
 const app = express();
 
@@ -10,5 +14,11 @@ app.get("/", (req, res) => {
     message: "Hello World!!",
   });
 });
+
+app.all("*", () => {
+  throw new NotFoundError();
+});
+
+app.use(errorHandler);
 
 export { app };
