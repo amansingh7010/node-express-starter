@@ -6,7 +6,7 @@ const path = require("path");
 
 const REPO_URL = "https://github.com/notamans/node-express-starter.git";
 
-module.exports = async function (projectName) {
+async function createProject(projectName) {
   try {
     console.log(`Creating a new Node.js Express app in ${projectName}...`);
 
@@ -21,9 +21,14 @@ module.exports = async function (projectName) {
     fs.mkdirSync(projectPath);
 
     execSync(`git clone ${REPO_URL} ${projectPath}`, { stdio: "inherit" });
-    execSync("rm cli.js", { stdio: "inherit" });
-
     process.chdir(projectPath);
+
+    // Remove the CLI script (cli.js) from the cloned repo
+    const cliFilePath = path.join(projectPath, "cli.js");
+    if (fs.existsSync(cliFilePath)) {
+      fs.unlinkSync(cliFilePath);
+    }
+
     const gitFolderPath = path.join(projectPath, ".git");
     if (fs.existsSync(gitFolderPath)) {
       execSync(`rm -rf ${gitFolderPath}`, { stdio: "inherit" });
@@ -34,6 +39,8 @@ module.exports = async function (projectName) {
 
     const packageJsonPath = path.join(projectPath, "package.json");
     const packageJson = require(packageJsonPath);
+
+    packageJson.name = projectName;
 
     // Check if the bin property exists and remove it
     if (packageJson.bin) {
@@ -50,4 +57,11 @@ module.exports = async function (projectName) {
   } catch (error) {
     console.error("Error creating the project:", error);
   }
-};
+}
+
+const projectName = process.argv[2];
+if (!projectName) {
+  console.error("Please provide a project name.");
+  process.exit(1);
+}
+createProject(projectName);
