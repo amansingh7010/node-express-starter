@@ -53,6 +53,12 @@ async function createProject(projectName) {
       );
     }
 
+    execSync("git add .", { stdio: "inherit" });
+    execSync(
+      "git commit -m 'Project initialized from @notamans/node-express-starter'",
+      { stdio: "inherit" },
+    );
+
     console.log("Project created successfully!");
   } catch (error) {
     console.error("Error creating the project:", error);
