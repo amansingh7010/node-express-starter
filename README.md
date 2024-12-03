@@ -37,11 +37,11 @@ The project is organized into the following directories:
 
 The following scripts are available:
 
-- `yarn dev`: Start the development server
-- `yarn build`: Compile the code for production
-- `yarn start`: Start the production server
-- `yarn test`: Run unit tests and integration tests
-- `yarn lint`: Run ESLint for code linting and formatting
+- `npm run dev`: Start the development server
+- `npm run build`: Compile the code for production
+- `npm run start`: Start the production server
+- `npm run test`: Run unit tests and integration tests
+- `npm run lint`: Run ESLint for code linting and formatting
 
 ### Environment Variables
 
