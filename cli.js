@@ -35,7 +35,7 @@ async function createProject(projectName) {
     }
 
     execSync("git init", { stdio: "inherit" });
-    execSync("yarn install", { stdio: "inherit" });
+    execSync("npm install", { stdio: "inherit" });
 
     const packageJsonPath = path.join(projectPath, "package.json");
     const packageJson = require(packageJsonPath);
