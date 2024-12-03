@@ -59,6 +59,15 @@ async function createProject(projectName) {
       { stdio: "inherit" },
     );
 
+    // Create a .env file from .env.template
+    const envTemplatePath = path.join(projectPath, ".env.template");
+    const envFilePath = path.join(projectPath, ".env");
+
+    if (fs.existsSync(envTemplatePath)) {
+      fs.copyFileSync(envTemplatePath, envFilePath);
+      console.log(`.env file created from .env.template.`);
+    }
+
     console.log("Project created successfully!");
   } catch (error) {
     console.error("Error creating the project:", error);
