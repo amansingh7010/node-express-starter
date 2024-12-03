@@ -1,10 +1,11 @@
-import { execSync } from "child_process";
-import path from "path";
-import fs from "fs";
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 const REPO_URL = "https://github.com/notamans/node-express-starter.git";
 
-export default async function (projectName) {
+module.exports = async function (projectName) {
   try {
     console.log(`Creating a new Node.js Express app in ${projectName}...`);
 
@@ -31,7 +32,7 @@ export default async function (projectName) {
     execSync("yarn install", { stdio: "inherit" });
 
     const packageJsonPath = path.join(projectPath, "package.json");
-    const packageJson = import(packageJsonPath);
+    const packageJson = require(packageJsonPath);
 
     // Check if the bin property exists and remove it
     if (packageJson.bin) {
@@ -48,4 +49,4 @@ export default async function (projectName) {
   } catch (error) {
     console.error("Error creating the project:", error);
   }
-}
+};

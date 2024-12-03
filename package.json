@@ -1,6 +1,6 @@
 {
   "name": "@notamans/node-express-starter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js Express Starter",
   "license": "MIT",
   "main": "index.js",
