@@ -4,7 +4,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const REPO_URL = "https://github.com/aaa/node-express-starter.git";
+const REPO_URL = "https://github.com/notamans/node-express-starter.git";
 
 module.exports = async function (projectName) {
   try {
