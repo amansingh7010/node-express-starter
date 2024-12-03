@@ -23,15 +23,21 @@ async function createProject(projectName) {
     execSync(`git clone ${REPO_URL} ${projectPath}`, { stdio: "inherit" });
     process.chdir(projectPath);
 
+    const gitFolderPath = path.join(projectPath, ".git");
+    if (fs.existsSync(gitFolderPath)) {
+      execSync(`rm -rf ${gitFolderPath}`, { stdio: "inherit" });
+    }
+
     // Remove the CLI script (cli.js) from the cloned repo
     const cliFilePath = path.join(projectPath, "cli.js");
     if (fs.existsSync(cliFilePath)) {
       fs.unlinkSync(cliFilePath);
     }
 
-    const gitFolderPath = path.join(projectPath, ".git");
-    if (fs.existsSync(gitFolderPath)) {
-      execSync(`rm -rf ${gitFolderPath}`, { stdio: "inherit" });
+    // Remove the LICENSE.md file from the cloned repo
+    const licenseFilePath = path.join(projectPath, "LICENSE.md");
+    if (fs.existsSync(licenseFilePath)) {
+      fs.unlinkSync(licenseFilePath);
     }
 
     execSync("git init", { stdio: "inherit" });
@@ -42,16 +48,16 @@ async function createProject(projectName) {
 
     packageJson.name = projectName;
 
-    // Check if the bin property exists and remove it
-    if (packageJson.bin) {
-      delete packageJson.bin;
+    // Remove properties from package.json
+    delete packageJson.license;
+    delete packageJson.bin;
+    delete packageJson.author;
 
-      fs.writeFileSync(
-        packageJsonPath,
-        JSON.stringify(packageJson, null, 2),
-        "utf-8",
-      );
-    }
+    fs.writeFileSync(
+      packageJsonPath,
+      JSON.stringify(packageJson, null, 2),
+      "utf-8",
+    );
 
     execSync("git add .", { stdio: "inherit" });
     execSync(

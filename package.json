@@ -3,6 +3,10 @@
   "version": "1.0.3",
   "description": "Node.js Express Starter",
   "license": "MIT",
+  "author": {
+    "name": "Amanjot Singh",
+    "email": "amansinghs7010@gmail.com"
+  },
   "scripts": {
     "build": "tsc && tsc-alias",
     "dev": "./node_modules/.bin/dotenvx run -- ts-node-dev --respawn --transpile-only --require tsconfig-paths/register src/server.ts",
