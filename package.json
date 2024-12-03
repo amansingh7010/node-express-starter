@@ -1,6 +1,6 @@
 {
   "name": "node-express-starter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias",
@@ -9,6 +9,9 @@
     "start": "./node_modules/.bin/dotenvx run -- node dist/server.js",
     "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "bin": {
+    "create-node-express-starter": "./cli.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
