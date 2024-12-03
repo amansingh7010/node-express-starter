@@ -4,12 +4,20 @@ A basic Node.js and Express.js starter project.
 
 ## Getting Started
 
-To get started with this project, follow these steps:
+Generate boilerplate using:
+<code>npx @notamans/create-node-express-starter <PROJECT_NAME></code>
 
-1. Clone the Repository
-2. Install dependencies: `yarn install`
-3. Start the development server: `yarn dev`
-4. API URL: `http://localhost:3000`
+API URL: `http://localhost:3000`
+
+### Features
+
+- Node.js and Express.js for building web applications
+- TypeScript for type safety and maintainability
+- dotenv for environment variable management
+- Jest for unit testing and integration testing
+- ESLint and Prettier for code linting and formatting
+- Winston for logging
+- Custom global error handler. Removes the need of redundant `try/catch` blocks.
 
 ### Project Structure
 
@@ -24,16 +32,6 @@ The project is organized into the following directories:
   - `services/`: Business logic for the application
 - `dist`: Compiled JavaScript code for production
 - `tests`: Unit tests and integration tests for the application
-
-### Features
-
-- Node.js and Express.js for building web applications
-- TypeScript for type safety and maintainability
-- dotenv for environment variable management
-- Jest for unit testing and integration testing
-- ESLint and Prettier for code linting and formatting
-- Winston for logging
-- Custom global error handler. Removes the need of redundant `try/catch` blocks.
 
 ### Scripts
 
