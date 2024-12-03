@@ -14,10 +14,11 @@ API URL: `http://localhost:3000`
 - Node.js and Express.js for building web applications
 - TypeScript for type safety and maintainability
 - dotenv for environment variable management
+- Proper directory structure
 - Jest for unit testing and integration testing
 - ESLint and Prettier for code linting and formatting
 - Winston for logging
-- Custom global error handler. Removes the need of redundant `try/catch` blocks.
+- Custom global error handler. Removes the need for redundant `try/catch` blocks.
 
 ### Project Structure
 
