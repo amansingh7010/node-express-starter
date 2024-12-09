@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import logger from "@services/logger.service";
+import { getLogger } from "@services/logger.service";
 import { CustomError } from "@errors/custom-error";
+
+const logger = getLogger(__filename);
 
 export const errorHandler: (
   err: Error,

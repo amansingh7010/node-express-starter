@@ -1,12 +1,9 @@
-// src/services/logger.service.ts
 import { createLogger, format, transports, Logger } from "winston";
 import path from "path";
 
-// Define available log transports
+// Build log transports based on environment variables
 const buildTransports = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const logTransports: any[] = [];
-
+  const logTransports = [];
   const {
     LOG_TO_CONSOLE,
     LOG_TO_FILE,
@@ -15,16 +12,16 @@ const buildTransports = () => {
     GRAFANA_PORT,
   } = process.env;
 
-  // Add Console Transport (for local dev)
+  // Add Console Transport (for local development)
   if (LOG_TO_CONSOLE === "true") {
     logTransports.push(
       new transports.Console({
-        format: format.combine(format.colorize(), format.simple()),
+        format: format.colorize(), // Add color for better visibility
       }),
     );
   }
 
-  // Add File Transport (if enabled)
+  // Add File Transports (if enabled)
   if (LOG_TO_FILE === "true") {
     const logDirectory = path.join(__dirname, "../../logs");
     logTransports.push(
@@ -39,7 +36,7 @@ const buildTransports = () => {
     );
   }
 
-  // Placeholder: Add Grafana Transport or any other service
+  // Add Grafana Transport (or similar log services)
   if (LOG_TO_GRAFANA === "true") {
     logTransports.push(
       new transports.Http({
@@ -53,16 +50,18 @@ const buildTransports = () => {
   return logTransports;
 };
 
-// Create the logger instance
-const logger: Logger = createLogger({
+// Base logger setup
+const baseLogger: Logger = createLogger({
   level: process.env.LOG_LEVEL || "info",
   format: format.combine(
-    format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    format.printf(({ level, message, timestamp }) => {
-      return `[${level.toUpperCase()}] ${timestamp} - ${message}`;
+    format.timestamp({ format: "YYYY-MM-DD HH:mm" }),
+    format.printf(({ level, message, timestamp, label }) => {
+      return `[${level.toUpperCase()}] ${timestamp} [${label}] - ${message}`;
     }),
   ),
   transports: buildTransports(),
 });
 
-export default logger;
+export const getLogger = (fileName: string): Logger => {
+  return baseLogger.child({ label: path.basename(fileName) });
+};

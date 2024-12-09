@@ -53,16 +53,12 @@ async function createProject(projectName) {
     delete packageJson.bin;
     delete packageJson.author;
 
+    packageJson.version = "0.0.1";
+
     fs.writeFileSync(
       packageJsonPath,
       JSON.stringify(packageJson, null, 2),
       "utf-8",
-    );
-
-    execSync("git add .", { stdio: "inherit" });
-    execSync(
-      "git commit -m 'Project initialized from @notamans/node-express-starter'",
-      { stdio: "inherit" },
     );
 
     // Create a .env file from .env.template

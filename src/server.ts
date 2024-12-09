@@ -1,6 +1,8 @@
-import logger from "@services/logger.service";
+import { getLogger } from "@services/logger.service";
 
 import { app } from "./app";
+
+const logger = getLogger(__filename);
 
 const PORT = process.env.PORT || 3000;
 const start = () => {
