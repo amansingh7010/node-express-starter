@@ -1,5 +1,6 @@
 import express from "express";
 import "express-async-errors";
+import cors from "cors";
 
 import logger from "@services/logger.service";
 import { errorHandler } from "@middlewares/error-handler";
@@ -9,6 +10,13 @@ import rootRoutes from "@routes/root.routes";
 const app = express();
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  }),
+);
 
 app.use(rootRoutes);
 
